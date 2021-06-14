@@ -1,0 +1,3 @@
+#node module dependencies that we dont want uploaded to git
+node_modules/
+.env

@@ -1,0 +1,315 @@
+@import url("https://fonts.googleapis.com/css2?family=Arvo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@300&display=swap");
+
+.recipeContainer {
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  top: 0px;
+}
+
+.loadingContainer {
+  position: relative;
+  top: 15vh;
+  left: 40vw;
+  right: 40vw;
+  height: 20vw;
+  width: 20vw;
+  /* background-color: sienna; */
+}
+
+/* .loadingContainer > img {
+  background-color: slateblue;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+} */
+
+.plate {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 20vw;
+  width: 20vw;
+}
+
+.carrot {
+  position: absolute;
+  top: 2.5vw;
+  left: 2.5vw;
+  right: 2.5vw;
+  bottom: 2.5vw;
+  height: 15vw;
+  width: 15vw;
+}
+
+.loadingText {
+  font-family: "Arvo", serif;
+  position: absolute;
+  font-size: 2.5vw !important;
+  width: 40vw;
+  left: 30vw;
+  right: 30vw;
+  color: rgb(58, 58, 58);
+  /* white-space: nowrap; */
+  margin-top: 16vh;
+}
+
+.editRecipe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: none !important;
+  border-bottom: none !important;
+  border-radius: 15px;
+  background-color: rgb(169, 112, 112);
+  color: white;
+  font-family: "Saira Extra Condensed", sans-serif;
+  justify-content: center !important;
+  align-content: center !important;
+  font-size: 25px;
+  padding-top: 11px;
+}
+
+.editRecipe:hover {
+  color: rgb(233, 233, 233) !important;
+  background-color: rgb(169, 102, 102);
+}
+
+.deleteRecipe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: none !important;
+  border-bottom: none !important;
+  border-radius: 15px;
+  background-color: rgb(169, 112, 112);
+  color: white;
+  font-family: "Saira Extra Condensed", sans-serif;
+  justify-content: center !important;
+  align-content: center !important;
+  font-size: 25px;
+  padding-top: 11px;
+  cursor: pointer;
+}
+
+.deleteRecipe:hover {
+  color: rgb(233, 233, 233) !important;
+  background-color: rgb(169, 102, 102);
+}
+
+/* .divider {
+  position: relative;
+  margin-top: -10px;
+  height: 10px;
+  background-color: white;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 40px;
+} */
+
+.photoHolder {
+  position: relative;
+  height: 60vh;
+  margin-top: 0px;
+  background-color: rgba(255, 255, 255, 0.651);
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  padding: 10px;
+}
+
+.recipeImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stepsContainer {
+  position: relative;
+  height: auto !important;
+  margin-left: 30px;
+  margin-right: 30px;
+  background-color: rgba(255, 255, 255, 0.151);
+  padding: 20px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin-bottom: 25px;
+}
+
+.recipeText {
+  font-family: "Saira Extra Condensed", sans-serif;
+  font-size: 27px;
+  color: rgb(37, 37, 37);
+  margin-bottom: 20px;
+}
+
+.ingredientContainerShow {
+  position: relative;
+  height: auto !important;
+}
+
+.instructionsText {
+  font-family: "Arvo", serif;
+  color: rgb(37, 37, 37);
+}
+
+.widgetContainer {
+  position: relative;
+  height: 60px;
+  margin-bottom: 25px;
+  margin-left: 30px;
+  margin-right: 30px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.151);
+  padding-bottom: 20px;
+}
+
+.widgetImage {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  left: 15px;
+  top: 15px;
+}
+
+.widgetText {
+  position: absolute;
+  font-family: "Saira Extra Condensed", sans-serif;
+  font-size: 20px;
+  align-self: center;
+  color: rgb(37, 37, 37);
+  left: 60px;
+  bottom: 20px;
+  white-space: nowrap;
+}
+
+.ingredientText {
+  float: left;
+  font-family: "Arvo", serif;
+  color: rgb(37, 37, 37);
+  font-weight: lighter;
+}
+
+.measurementText {
+  float: left;
+  white-space: nowrap;
+  font-family: "Arvo", serif;
+  color: rgb(0, 0, 0);
+  font-weight: 1000 !important;
+  margin-right: 7px;
+}
+
+.mainIngredientText {
+  display: flex;
+  white-space: nowrap;
+  margin-right: 0px;
+  margin-left: 0px;
+  height: 25px;
+  margin-bottom: 12px;
+}
+
+.ingredientBullet {
+  float: left;
+  width: 22px;
+  height: 22px;
+  margin-left: 0px;
+  margin-right: 10px;
+}
+
+/* .videoHolder {
+  position: absolute;
+  left: 15px;
+  bottom: 15px;
+  height: 50px;
+  width: 80px;
+  object-fit: contain;
+} */
+
+@media screen and (min-width: 1200px) and (max-width: 1800px) {
+  .recipeContainer {
+    left: 15%;
+    right: 15%;
+  }
+  .photoHolder {
+    height: 52vh;
+  }
+}
+
+@media screen and (min-width: 950px) and (max-width: 1200px) {
+  .recipeContainer {
+    left: 15%;
+    right: 15%;
+  }
+  .photoHolder {
+    height: 46vh;
+  }
+}
+
+@media screen and (min-width: 850px) and(max-width: 950px) {
+  .recipeContainer {
+    left: 10%;
+    right: 10%;
+  }
+  .photoHolder {
+    height: 44vh;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 850px) {
+  .recipeContainer {
+    left: 5%;
+    right: 5%;
+  }
+  .photoHolder {
+    height: 42vh;
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 600px) {
+  .recipeContainer {
+    left: 5%;
+    right: 5%;
+  }
+  .photoHolder {
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 40vh;
+  }
+  .stepsContainer {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .widgetContainer {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .recipeContainer {
+    left: 0%;
+    right: 0%;
+  }
+  .photoHolder {
+    height: 38vh;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .stepsContainer {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .widgetContainer {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

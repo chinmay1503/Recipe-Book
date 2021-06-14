@@ -1,0 +1,269 @@
+@import url("https://fonts.googleapis.com/css2?family=Arvo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@300&display=swap");
+
+.mainAddRecipeContainer {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: -10px;
+  min-height: 800px;
+  max-height: 3000px;
+  /* background-color: aqua; */
+}
+
+.mainInput {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+.ingredientContainer {
+  position: relative;
+  width: 100%;
+  height: 50px !important;
+  margin-bottom: 25px;
+  /* background-color: rgb(0, 0, 0); */
+}
+
+.ingredientInput {
+  position: absolute;
+  width: 60%;
+  left: 0px;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+
+.measureInput {
+  position: absolute;
+  width: 38%;
+  right: 0px;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+
+.newIngredient {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 25px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 8px;
+  font-family: "Arvo", serif;
+  font-weight: bold;
+  color: black;
+}
+
+.newIngredientGone {
+  position: relative;
+  width: 100%;
+  height: 0px;
+  margin-bottom: 0px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.newIngredient:hover {
+  background-color: rgb(231, 231, 231);
+}
+
+.newIngredient:active {
+  background-color: rgb(206, 206, 206);
+}
+
+.moreIngredients {
+  position: relative;
+  width: 100%;
+  min-height: 0px;
+  margin-bottom: 25px;
+}
+
+h2 {
+  font-family: "Arvo", serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 0px;
+}
+
+.directionsInput {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  overflow-y: scroll;
+  resize: none;
+}
+
+.submitButton {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 55px;
+  background-color: rgb(169, 112, 112);
+  color: white;
+  font-family: "Arvo", serif;
+}
+
+.submitButton:hover {
+  background-color: rgba(169, 112, 112, 0.747);
+}
+
+.submitButton:active {
+  background-color: rgb(172, 130, 130);
+}
+
+.uploadImage {
+  position: absolute;
+  left: 10px;
+  height: 30px;
+  width: 30px;
+  top: 10px;
+  object-fit: contain;
+}
+
+.youtubeInput {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.regionInput {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.categoryInput {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.tagsInput {
+  padding-left: 50px;
+}
+
+.mainButton {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 2px;
+  background-color: rgb(255, 255, 255);
+}
+
+.dropdownContainer-open {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-bottom: 25px;
+  border: none;
+  border-radius: 8px;
+}
+.dropdownContainer-closed {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 25px;
+  border: none;
+  border-radius: 8px;
+}
+
+.dropdown-closed {
+  width: 100% !important;
+  margin-top: 52px;
+  height: 0px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.705);
+  overflow-y: hidden;
+}
+
+.dropdown-open {
+  position: relative;
+  width: 100% !important;
+  z-index: 30000;
+  height: auto;
+  border: 1px solid rgba(83, 83, 83, 0.575);
+  border-radius: 8px;
+  background-color: rgb(255, 255, 255);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.downArrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  right: 20px;
+  top: 20px;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-property: -webkit-transform;
+  -moz-transition-property: -moz-transform;
+  -o-transition-property: -o-transform;
+  transition-property: transform;
+}
+
+.dropdownButtons {
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  height: 35px;
+  border: none;
+  background-color: rgb(255, 255, 255);
+}
+
+.dropdownButtons:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.mainButton:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.downArrowRotate {
+  -webkit-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+@media screen and (max-width: 1000px) {
+  .mainAddRecipeContainer {
+    left: 20%;
+    right: 20%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .mainAddRecipeContainer {
+    left: 12%;
+    right: 12%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .mainAddRecipeContainer {
+    left: 5%;
+    right: 5%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .mainAddRecipeContainer {
+    left: 2%;
+    right: 2%;
+  }
+}

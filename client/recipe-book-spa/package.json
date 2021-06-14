@@ -1,0 +1,53 @@
+{
+  "name": "recipe-book-spa",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.21.1",
+    "material-react-toastify": "^1.0.1",
+    "mdb-react-ui-kit": "^1.0.0-beta5",
+    "mdbreact": "^5.0.2",
+    "react": "^17.0.2",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-bootstrap-validation": "^0.1.11",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-dom": "^17.0.2",
+    "react-native": "^0.64.1",
+    "react-native-web": "^0.16.3",
+    "react-onevent": "^1.0.1",
+    "react-scripts": "4.0.3",
+    "react-tag-autocomplete": "^6.1.0",
+    "react-tag-input": "^6.5.2",
+    "rebound": "^0.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "css-loader": "^5.2.4",
+    "less": "^4.1.1",
+    "less-loader": "^8.1.1",
+    "style-loader": "^2.0.0"
+  }
+}

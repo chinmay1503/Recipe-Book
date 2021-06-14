@@ -1,0 +1,309 @@
+@import url("https://fonts.googleapis.com/css2?family=Arvo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@300&display=swap");
+
+.mainSearchContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+@keyframes browseLinkFade {
+  0% {
+    opacity: 0;
+    transform: translatey(-200px);
+  }
+  100% {
+    opacity: 1;
+    transform: translatey(0px);
+  }
+}
+@keyframes homeLinkFade {
+  0% {
+    opacity: 0;
+    transform: translatey(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translatey(0px);
+  }
+}
+
+.recipeBox {
+  position: relative;
+  display: flex;
+  width: 270px;
+  height: 320px;
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 50px;
+  margin: 25px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  padding: 8px;
+  border-bottom: none !important;
+}
+
+.searchHeader {
+  position: absolute;
+  top: 30px;
+  right: 0px;
+  left: 0px;
+  justify-content: center;
+}
+
+.searchHeaderText {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.filters {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+  display: flex;
+}
+
+.noRecipeIcon {
+  position: relative;
+  margin-left: 44vw;
+  margin-right: 44vw;
+  width: 12vw;
+  height: 12vw;
+}
+.noRecipe {
+  position: relative;
+  font-size: 40px;
+  font-family: "Fredericka the Great", cursive !important;
+}
+
+.noRecipeContainer {
+  position: absolute;
+  top: 130px;
+  right: 0px;
+  left: 0px;
+}
+
+.filterButton {
+  position: absolute;
+  font-family: "Saira Extra Condensed", sans-serif;
+  width: 120px;
+  font-size: 20px;
+  bottom: 0px;
+  top: 0px;
+  right: 50px;
+  min-width: 80px;
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.filterIcon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 10px;
+  top: 10px;
+}
+
+.filterIcon2 {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  left: 10px;
+  top: 10px;
+}
+
+.recipeSearchImage {
+  width: 100%;
+}
+
+.dropdownDivActive {
+  position: relative;
+  width: 220px;
+  height: 50px;
+  margin-left: 10px;
+  margin-top: 20px;
+  animation: 0.5s browseLinkFade;
+}
+
+.filterDivActive {
+  position: absolute;
+  width: 240px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.753);
+  right: 0px;
+  top: -140px;
+  z-index: 200000;
+}
+
+.finishedFilterActive {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-family: "Saira Extra Condensed", sans-serif;
+  border-radius: 8px;
+  background-color: rgb(169, 112, 112);
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+}
+
+.clearFilterActive {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-family: "Saira Extra Condensed", sans-serif;
+  border-radius: 8px;
+  font-size: 20px;
+  background-color: rgb(83, 83, 83);
+  color: white;
+}
+
+.recipeImageHolder {
+  position: absolute;
+  bottom: 70px;
+  right: 10px;
+  left: 10px;
+  top: 10px;
+  overflow: hidden;
+  object-fit: contain !important;
+}
+
+.recipeSearchText {
+  font-family: "Saira Extra Condensed", sans-serif;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: absolute;
+  height: 65px;
+  left: 0px;
+  right: 0px;
+  align-content: center;
+  bottom: 0px;
+  font-size: 20px;
+  text-align: center;
+  color: rgb(58, 58, 58);
+  font-weight: bold;
+}
+
+.xLine1 {
+  position: relative;
+  right: 0px;
+  width: 25px;
+  height: 2px;
+
+  transition: all 0.3s ease;
+  transform: rotate(-45deg) translate(-1.4px, 0.5px);
+  background-color: white !important;
+}
+
+.xLine2 {
+  position: relative;
+  right: 0px;
+  width: 25px;
+  height: 2px;
+  transition: all 0.3s ease;
+  transform: rotate(45deg) translate(0px, -0.3px);
+  background-color: white !important;
+}
+
+.stopFilterActive {
+  align-content: center;
+  justify-content: center;
+  position: relative;
+  width: 50px;
+  margin-left: 99px;
+  height: 50px;
+  margin-top: 50px;
+  border: none;
+  background-color: transparent;
+  margin-bottom: 40px;
+}
+
+.stopFilter {
+  align-content: center;
+  justify-content: center;
+  position: relative;
+  width: 50px;
+  margin-left: 99px;
+  height: 50px;
+  margin-top: 50px;
+  border: none;
+  background-color: transparent;
+  margin-bottom: 40px;
+  opacity: 0;
+  z-index: -2000;
+}
+
+.dropdownDiv {
+  position: relative;
+  width: 220px;
+  height: 50px;
+  margin-left: 10px;
+  margin-top: 20px;
+  opacity: 0;
+  z-index: -2000;
+}
+
+.filterDiv {
+  position: absolute;
+  width: 240px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.753);
+  right: 0px;
+  opacity: 0;
+  top: 0px;
+  z-index: -2000;
+}
+
+.finishedFilter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-family: "Saira Extra Condensed", sans-serif;
+  border-radius: 8px;
+  font-size: 20px;
+  opacity: 0;
+  z-index: -2000;
+}
+
+.clearFilter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-family: "Saira Extra Condensed", sans-serif;
+  border-radius: 8px;
+  font-size: 20px;
+  opacity: 0;
+  z-index: -2000;
+}
+
+@media screen and (max-width: 600px) {
+  .searchHeaderText {
+    font-size: 6vw;
+    margin-bottom: 30px;
+  }
+
+  .noRecipe {
+    font-size: 6vw;
+  }
+
+  .noRecipeIcon {
+    margin-left: 38vw;
+    margin-right: 38vw;
+    width: 24vw;
+    height: 24vw;
+  }
+
+  .filterButton {
+    position: relative;
+    font-family: "Saira Extra Condensed", sans-serif;
+    width: 270px;
+    display: block;
+    margin: 0 auto;
+    right: 0px;
+  }
+}

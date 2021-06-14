@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=Arvo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@300&display=swap");
+body {
+  background-color: rgb(229, 160, 160) !important;
+  /* background-color: rgba(179, 179, 179, 0.562); */
+}
+
+/*This is the animation function for text menu elements*/
+@keyframes browseLinkFade {
+  0% {
+    opacity: 0;
+    transform: translatey(-200px);
+  }
+  100% {
+    opacity: 1;
+    transform: translatey(0px);
+  }
+}
+@keyframes homeLinkFade {
+  0% {
+    opacity: 0;
+    transform: translatey(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translatey(0px);
+  }
+}
+
+.logo {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  left: 15px;
+  top: 15px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  min-height: 135px;
+}
+
+nav .header {
+  text-decoration: none;
+  height: 135px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  right: 0px;
+  top: 0px;
+  width: 50%;
+  flex-direction: row;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  font-family: "Saira Extra Condensed", sans-serif;
+  font-size: 30px;
+  text-decoration: none;
+  color: rgb(58, 58, 58);
+}
+
+a:hover {
+  color: rgb(78, 78, 78);
+  border-bottom: 5px solid rgb(78, 78, 78);
+}
+
+a:active {
+  color: rgb(128, 128, 128);
+  border-bottom: 5px solid rgb(128, 128, 128);
+}
+
+a:focus {
+  color: rgb(255, 255, 255);
+  border-bottom: 5px solid rgb(255, 255, 255);
+}
+
+h1 {
+  font-family: "Saira Extra Condensed", sans-serif;
+  font-size: 48px !important;
+  color: rgb(58, 58, 58);
+  font-weight: bold;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.burger {
+  display: flex;
+  position: absolute;
+  right: 12%;
+  top: 50px;
+  cursor: pointer;
+  opacity: 0;
+  background-color: transparent;
+  border: none;
+}
+
+.burger div {
+  position: relative;
+  right: 0px;
+  width: 25px;
+  height: 2px;
+  background-color: rgb(37, 37, 37);
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+/*This gets rid of the menu background when the screen is bigger*/
+.background {
+  opacity: 0;
+  width: 0px;
+}
+
+/*If the screen is smaller than 600 px it switches to small mode*/
+@media screen and (max-width: 600px) {
+  a {
+    font-size: 28px;
+    color: rgb(255, 255, 255);
+  }
+
+  a:hover {
+    color: rgb(206, 206, 206);
+    border-bottom: none;
+  }
+
+  a:active {
+    color: rgb(128, 128, 128);
+    border-bottom: none;
+  }
+
+  a:focus {
+    color: rgb(255, 255, 255);
+    border-bottom: none;
+  }
+  body {
+    overflow-x: hidden;
+    background-size: 330%, 100%;
+    background-position: top, right;
+  }
+
+  .background {
+    z-index: 5;
+    opacity: 1;
+    position: absolute;
+    display: flexbox;
+    background-color: rgba(29, 29, 29, 0.671);
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 0%;
+  }
+  .backgroundActive {
+    z-index: 5;
+    opacity: 1;
+    position: absolute;
+    background-color: rgba(29, 29, 29, 0.671);
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 35%;
+  }
+
+  .homeButton {
+    z-index: 200;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    font-size: 30px;
+    height: 47px;
+    top: 15vh;
+    width: 60%;
+    z-index: -2000;
+    opacity: 0;
+  }
+
+  .browseButton {
+    position: absolute;
+    text-align: center;
+    right: 10px;
+    font-size: 30px;
+    height: 47px;
+    top: 28vh;
+    width: 60%;
+    z-index: -2000;
+    opacity: 0;
+  }
+
+  .homeButtonActive {
+    z-index: 20000;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    font-size: 25px;
+    height: 47px;
+    top: 15vh;
+    width: 60%;
+    animation: 0.5s homeLinkFade;
+  }
+
+  .browseButtonActive {
+    position: absolute;
+    text-align: center;
+    right: 10px;
+    font-size: 25px;
+    height: 47px;
+    top: 28vh;
+    width: 60%;
+    z-index: 20000;
+    animation: 0.5s browseLinkFade;
+  }
+
+  .burger {
+    z-index: 1000;
+    display: block;
+    opacity: 100;
+  }
+}
+
+/*If the burger is pressed this makes the menu appear*/
+
+/*These toggle functions are what animate the burger.*/
+.line1Active {
+  transform: rotate(-45deg) translate(-5px, 4.5px);
+  background-color: white !important;
+}
+.line2Active {
+  opacity: 0;
+}
+.line3Active {
+  transform: rotate(45deg) translate(-5px, -5px);
+  background-color: white !important;
+}
+
+.shadow {
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 3px 3px 5px 6px #ccc; /* Firefox 3.5 - 3.6 */
+  box-shadow: 3px 3px 5px 6px #ccc; /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}

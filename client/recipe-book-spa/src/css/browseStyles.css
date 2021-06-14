@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  font-family: "SAIRA EXTRA CONDENSED";
+  font-size: 40px;
+  color: rgb(37, 37, 37);
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.recipe-List {
+  display: flex;
+  margin-top: 50px;
+  justify-content: center;
+  text-align: center;
+}
+
+.links {
+  color: rgb(58, 58, 58);
+  border-bottom: none !important;
+  cursor: pointer;
+}
+
+.links:hover {
+  color: rgb(118, 118, 118);
+}
+
+.links:active {
+  color: rgb(255, 255, 255);
+}
+
+.recipe-key {
+  background: rgba(255, 255, 255, 0.788);
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin: 20px;
+}
+
+.recipe-Name {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.recipeSection {
+  padding: 20px;
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.342);
+  margin-bottom: 50px;
+}
+
+.galleryView {
+  position: relative;
+  margin-left: 20px;
+  height: 100%;
+  width: 180px;
+  border: none !important;
+  border-bottom: none !important;
+  border-radius: 15px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(58, 58, 58);
+  font-family: "Saira Extra Condensed", sans-serif;
+  font-size: 25px;
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+.flipList {
+  position: relative;
+  margin-left: 30px;
+  height: 100%;
+  width: 150px;
+  border: none !important;
+  border-bottom: none !important;
+  border-radius: 15px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(58, 58, 58);
+  font-family: "Saira Extra Condensed", sans-serif;
+  font-size: 25px;
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+.flipList:hover {
+  background-color: rgb(223, 223, 223);
+}
+
+.galleryView:hover {
+  background-color: rgb(223, 223, 223);
+}
+
+.browseWidgetContainer {
+  position: absolute;
+  height: 45px;
+  justify-content: center;
+  align-content: center;
+  right: 0px;
+  left: 0px;
+  top: 30px;
+}
+
+.sortImage {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  width: 30px;
+  height: 30px;
+}
+
+.listImage {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 28px;
+  height: 28px;
+}
+
+.galleryImage {
+  position: absolute;
+  left: 15px;
+  top: 14px;
+  width: 20px;
+  height: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .browseWidgetContainer {
+    width: 60%;
+    right: 20%;
+    left: 20%;
+    height: 110px;
+  }
+
+  .galleryView {
+    height: 45px;
+    width: 100%;
+    margin: 0px;
+  }
+
+  .flipList {
+    height: 45px;
+    width: 100%;
+    margin: 0px;
+    margin-bottom: 20px;
+  }
+
+  .recipeSection {
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+
+  h1 {
+    margin-top: 100px;
+  }
+}
