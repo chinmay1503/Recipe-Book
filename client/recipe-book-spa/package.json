@@ -12,10 +12,10 @@
     "react-bootstrap-validation": "^0.1.11",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^17.0.2",
-    "react-native": "^0.64.1",
+    "react-native": "^0.69.3",
     "react-native-web": "^0.16.3",
     "react-onevent": "^1.0.1",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "react-tag-autocomplete": "^6.1.0",
     "react-tag-input": "^6.5.2",
     "rebound": "^0.1.0"
