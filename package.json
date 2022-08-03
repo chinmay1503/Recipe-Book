@@ -19,11 +19,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@heroku/buildpack-registry": "^1.0.1",
+    "async-file": "^2.0.2",
+    "cli-ux": "^6.0.9",
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
+    "got": "^12.3.0",
     "heroku": "^7.49.1",
-    "pg": "^8.6.0"
+    "pg": "^8.6.0",
+    "phoenix": "^1.6.11"
   },
   "devDependencies": {
     "webpack": "^5.36.2",
