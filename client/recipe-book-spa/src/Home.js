@@ -107,6 +107,7 @@ class Home extends Component {
             recognition.addEventListener('result', function(event) {
                 const transcript = event.results[0][0].transcript;
                 this.setState({ searchTerm: transcript });
+                this.setState({navClass: "navLinkActive"});
                 const searchBox = document.getElementById("searchBox");
                 searchBox.value = transcript;
               }.bind(this));
