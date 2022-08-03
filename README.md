@@ -46,7 +46,7 @@ It supports all the basic CRUD functionalities,
   Lots and lots of npm module documentations  
 
 ## Demo deployed On Heroku 
-https://recipe-book-online.herokuapp.com/
+https://recipe-boook.herokuapp.com/
 
 
 
