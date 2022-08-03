@@ -112,6 +112,18 @@
   pointer-events: all;
 }
 
+.micButton {
+  position: absolute;
+  border: none;
+  right: 0px;
+  top: 5px;
+  bottom: 0px;
+  width: 120px;
+  z-index: 100;
+  background-color: transparent;
+  border-bottom: none !important;
+}
+
 .searchButton {
   position: absolute;
   border: none;
