@@ -8,17 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ToastContainer, toast } from 'material-react-toastify';
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-let recognition;
-
-if (SpeechRecognition) {
-    recognition = new SpeechRecognition();
-} else {
-    toast.dark("Sorry the browser doesn't support Speech Recognition!", {
-        position:"top-right",
-        autoClose: 3000,
-        closeOnClick: true
-    });
-}
 
 class Home extends Component {
     constructor(props) {
@@ -30,10 +19,51 @@ class Home extends Component {
         this.state = {
           searchTerm: "",
           placeholder: "Search for a Recipe...",
-          navClass: "navLink"
+          navClass: "navLink",
+          recognition: null
         };
         
       }
+
+    componentDidMount() {
+        
+        const micBtn = document.getElementsByClassName("micButton")[0];
+        const micIcon = micBtn.querySelector("svg");
+        if (SpeechRecognition) {
+
+            let recognition = new SpeechRecognition();
+            this.setState({recognition : recognition});
+
+            recognition.onstart = function() {
+                console.log("Speech Recognition active");
+                micIcon.classList.add("fa-beat-fade");
+            }
+
+            recognition.onend = function() {
+                console.log("Speech Recognition stopped");
+                micIcon.classList.remove("fa-beat-fade");
+            }
+
+            recognition.onerror = function() {
+                console.log("Something went wrong while listening! Speech Recognition stopped");
+            }
+
+            recognition.addEventListener('result', function(event) {
+                const transcript = event.results[0][0].transcript;
+                this.setState({ searchTerm: transcript });
+                this.setState({navClass: "navLinkActive"});
+                const searchBox = document.getElementById("searchBox");
+                searchBox.value = transcript;
+              }.bind(this));
+        } else {
+            micBtn.remove();
+            toast.dark("Sorry the browser doesn't support Speech Recognition!", {
+                position: "top-right",
+                autoClose: 3000,
+                closeOnClick: true,
+            });
+        }
+    }
 
     setTerm(event) {
         if (event.target.value !== "")
@@ -77,40 +107,17 @@ class Home extends Component {
     
     onMicrophoneClick(event) 
     {
-        if (SpeechRecognition) {
+        if (this.state.recognition) {
             const micBtn = event.currentTarget;
             const micIcon = micBtn.querySelector("svg");
 
             if (!micIcon.classList.contains("fa-beat-fade")) {
                 // Start Speech Recoginition
-                recognition.start();
+                this.state.recognition.start();
             } else {
                 // Stop Speech Recoginition
-                recognition.stop();
+                this.state.recognition.stop();
             }
-
-
-            recognition.onstart = function() {
-                console.log("Speech Recognition active");
-                micIcon.classList.add("fa-beat-fade");
-            }
-
-            recognition.onend = function() {
-                console.log("Speech Recognition stopped");
-                micIcon.classList.remove("fa-beat-fade");
-            }
-
-            recognition.onerror = function() {
-                console.log("Something went wrong while listening! Speech Recognition stopped");
-            }
-
-            recognition.addEventListener('result', function(event) {
-                const transcript = event.results[0][0].transcript;
-                this.setState({ searchTerm: transcript });
-                this.setState({navClass: "navLinkActive"});
-                const searchBox = document.getElementById("searchBox");
-                searchBox.value = transcript;
-              }.bind(this));
         }
     }
     
