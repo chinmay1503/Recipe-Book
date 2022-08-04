@@ -124,6 +124,18 @@
   border-bottom: none !important;
 }
 
+.dialogFlowMicButton {
+  background: var(--df-messenger-button-titlebar-color);
+  box-shadow: rgb(0 0 0 / 24%) 1px 4px 15px 0px;
+  border: none;
+  border-radius: 50%;
+  height: 56px;
+  width: 56px;
+  position:fixed;
+  bottom: 20px;
+  right: 95px;
+}
+
 .searchButton {
   position: absolute;
   border: none;

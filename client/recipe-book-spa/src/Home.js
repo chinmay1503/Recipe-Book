@@ -21,7 +21,11 @@ class Home extends Component {
           placeholder: "Search for a Recipe...",
           navClass: "navLink",
           recognition: null,
-          dialogFlowAgent: null
+          dialogFlowAgent: null,
+          isDialogFlowAgentLoaded: false,
+          isRecordingVoice: false,
+          searchMicButtonRecording: false,
+          diaglogFlowMicButtonRecording: false
         };
         
       }
@@ -31,6 +35,21 @@ class Home extends Component {
         if (dfMessenger) {
             this.setState({dialogFlowAgent: dfMessenger});
         }
+
+        dfMessenger.addEventListener('df-messenger-loaded', function(event) {
+            let dfMessengerBtn = document.querySelector('df-messenger').shadowRoot.querySelector('button#widgetIcon');
+            
+            dfMessengerBtn.addEventListener('click', function(event) {
+                // The Logic to show mic button when the dialogFlow widget icon is clicked
+                if (!this.state.isDialogFlowAgentLoaded) {
+                    this.setState({isDialogFlowAgentLoaded: true});
+                    let dfMessengerMicBtn = document.querySelector('button.dialogFlowMicButton');
+                    console.log(dfMessengerMicBtn)
+                } else {
+                    this.setState({isDialogFlowAgentLoaded: false});
+                }
+            }.bind(this));
+        }.bind(this));
 
         dfMessenger.addEventListener('df-response-received', function (event) {
             console.log(event);
@@ -91,20 +110,17 @@ class Home extends Component {
         }.bind(this));
 
         const micBtn = document.getElementsByClassName("micButton")[0];
-        const micIcon = micBtn.querySelector("svg");
         if (SpeechRecognition) {
 
             let recognition = new SpeechRecognition();
             this.setState({recognition : recognition});
 
-            recognition.onstart = function() {
+            recognition.onstart = function(event) {
                 console.log("Speech Recognition active");
-                micIcon.classList.add("fa-beat-fade");
             }
 
-            recognition.onend = function() {
+            recognition.onend = function(event) {
                 console.log("Speech Recognition stopped");
-                micIcon.classList.remove("fa-beat-fade");
             }
 
             recognition.onerror = function() {
@@ -112,11 +128,23 @@ class Home extends Component {
             }
 
             recognition.addEventListener('result', function(event) {
-                const transcript = event.results[0][0].transcript;
-                this.setState({ searchTerm: transcript });
-                this.setState({navClass: "navLinkActive"});
-                const searchBox = document.getElementById("searchBox");
-                searchBox.value = transcript;
+                // This logic helps to determine which recording button was clicked and populates the input box accordingly
+                if (this.state.searchMicButtonRecording) {
+                    const transcript = event.results[0][0].transcript;
+                    this.setState({ searchTerm: transcript });
+                    this.setState({navClass: "navLinkActive"});
+                    const searchBox = document.getElementById("searchBox");
+                    searchBox.value = transcript;
+                    this.setState({searchMicButtonRecording: false});
+                } else if (this.state.diaglogFlowMicButtonRecording) {
+                    const transcript = event.results[0][0].transcript;
+                    const dfMessengerInputBox = document.querySelector('df-messenger').shadowRoot.querySelector('df-messenger-chat')
+                    .shadowRoot.querySelector('df-messenger-user-input')
+                    .shadowRoot.querySelector('input')
+
+                    dfMessengerInputBox.value = transcript;
+                    this.setState({diaglogFlowMicButtonRecording: false});
+                }
               }.bind(this));
         } else {
             micBtn.remove();
@@ -174,17 +202,30 @@ class Home extends Component {
             const micBtn = event.currentTarget;
             const micIcon = micBtn.querySelector("svg");
 
-            if (!micIcon.classList.contains("fa-beat-fade")) {
-                // Start Speech Recoginition
+            if (!this.state.isRecordingVoice) {
                 this.state.recognition.start();
-            } else {
-                // Stop Speech Recoginition
-                this.state.recognition.stop();
+                this.setState({isRecordingVoice: true});
+                micIcon.classList.add("fa-beat-fade");
+
+                if (micBtn.className === "micButton") {
+                    this.setState({searchMicButtonRecording : true});
+                } else if (micBtn.className === "dialogFlowMicButton") {
+                    this.setState({diaglogFlowMicButtonRecording : true});
+                }
+
+                // This method automatically stops the mic animation after the mentioned time.
+                setTimeout(function(scope) {
+                    // Commenting this out as I want the recognition to continue listening even if the animation has stopped. 
+                    //scope.state.recognition.stop();
+                    scope.setState({isRecordingVoice: false})
+                    micIcon.classList.remove("fa-beat-fade");
+                }, 5000, this)
             }
         }
     }
     
     render(){
+        const isDialogFlowAgentLoaded = this.state.isDialogFlowAgentLoaded;
         return(
             <HashRouter>
                 <div className = "contentContainer">
@@ -215,6 +256,10 @@ class Home extends Component {
                         agent-id="d626b179-fb08-4a7b-8697-cc28513e5a3a"
                         language-code="en"
                         ></df-messenger>
+                        
+                        {isDialogFlowAgentLoaded &&
+                            <button className = "dialogFlowMicButton" type="button" onClick = {this.onMicrophoneClick}><FontAwesomeIcon icon="fas fa-microphone" /></button>
+                        }
                 </div>
             </HashRouter>
         )
