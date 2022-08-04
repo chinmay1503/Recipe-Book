@@ -65,40 +65,41 @@ class Home extends Component {
             } else if (intentName === "GetRecipeByIngredientIntent") {
                 let ingredientName = event.detail.response.queryResult.parameters.food
                 ingredientName = ingredientName.charAt(0).toUpperCase() + ingredientName.slice(1).toLowerCase()
-                dfMessenger.renderCustomText('Here are some ' + ingredientName + ' recipe Suggestions:');
-                handlePayloadRecipeSuggestionData(event)
+                handlePayloadRecipeSuggestionData(event, ingredientName);
             } else if (intentName === "GetRecipeByCuisineIntent") {
                 let cuisineParam = event.detail.response.queryResult.parameters.Cuisine
                 cuisineParam = cuisineParam.charAt(0).toUpperCase() + cuisineParam.slice(1).toLowerCase()
-                dfMessenger.renderCustomText('Here are some ' + cuisineParam + ' recipe Suggestions:');
-                handlePayloadRecipeSuggestionData(event)
+                handlePayloadRecipeSuggestionData(event, cuisineParam);
             }
         });
 
-        function handlePayloadRecipeSuggestionData(event) {
-            const meals = event.detail.response.queryResult.fulfillmentMessages[0].payload.meals;
-            let mealSize = meals.length > 10 ? 10 : meals.length;
-
-            const payload = [];
-            for (let i = 0; i < mealSize; i++) {
-                let currMeal = meals[i];
-                let mealName = currMeal.strMeal.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
-                let mealImg = currMeal.strMealThumb;
-                payload.push({
-                    "type": "list",
-                    "title": mealName,
-                    "image": {
-                        "src": {
-                          "rawUrl": mealImg
-                        }
-                    }
-                  });
+        function handlePayloadRecipeSuggestionData(event, param) {
+            if (event.detail && event.detail.response && event.detail.response.queryResult && event.detail.response.queryResult.fulfillmentMessages[0] && event.detail.response.queryResult.fulfillmentMessages[0].payload && event.detail.response.queryResult.fulfillmentMessages[0].payload.meals) {
+                const meals = event.detail.response.queryResult.fulfillmentMessages[0].payload.meals;
+                let mealSize = meals.length > 10 ? 10 : meals.length;
                 
-                  payload.push({
-                    "type": "divider"
-                  });
+                const payload = [];
+                dfMessenger.renderCustomText('Here are some ' + param + ' recipe Suggestions:');
+                for (let i = 0; i < mealSize; i++) {
+                    let currMeal = meals[i];
+                    let mealName = currMeal.strMeal.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+                    let mealImg = currMeal.strMealThumb;
+                    payload.push({
+                        "type": "list",
+                        "title": mealName,
+                        "image": {
+                            "src": {
+                              "rawUrl": mealImg
+                            }
+                        }
+                      });
+                    
+                      payload.push({
+                        "type": "divider"
+                      });
+                }
+                dfMessenger.renderCustomCard(payload);
             }
-            dfMessenger.renderCustomCard(payload);
         }
 
         dfMessenger.addEventListener('df-list-element-clicked', function (event) {
