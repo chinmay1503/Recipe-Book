@@ -4,15 +4,22 @@ import { Animated, Easing } from 'react-native';
 import RecipeApi from "./services/RecipeApi";
 import "./css/recipeStyles.css";
 import SpringScrollbars from "./services/SpringScrollBar";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const speechSynthesis = window.speechSynthesis || window.webkitSpeechSynthesis;
 
 class Recipe extends Component {
   constructor(props) {
     super(props);
+    this.onPlayClick = this.onPlayClick.bind(this);
     this.state = {
       error: null,
       isLoaded: false,
       items: [],
-      spinAnim: new Animated.Value(0)
+      spinAnim: new Animated.Value(0),
+      speechSynthesizer: null,
+      isSpeaking: false,
+      iconName: "fas fa-play"
     };
   }
 
@@ -58,6 +65,43 @@ class Recipe extends Component {
         });
       }
     );
+  }
+
+  onPlayClick(event) {
+    const playBtn = event.currentTarget;
+    
+    if (!this.state.isSpeaking) {
+      const utterance = new window.SpeechSynthesisUtterance();
+      if (Array.isArray(this.state.items.data.recipes))
+      {
+        const recipe = this.state.items.data.recipes[0];
+        let recipeName = recipe.mealName;
+        utterance.text = "To make " + recipeName + ", " + recipe.Instructions;
+      } else {
+        utterance.text = "Sorry! I am unable to read this information"
+      }
+      
+      if (speechSynthesis) {
+        const voices = speechSynthesis.getVoices();
+        console.log(voices);
+
+        // 'Microsoft Zira - English (United States)'
+        utterance.voice = voices[2];
+        utterance.rate = 1.2;
+        utterance.addEventListener("end", function(event) {
+          this.setState({iconName: "fas fa-play"});
+        }.bind(this))
+
+        speechSynthesis.speak(utterance);
+        this.setState({isSpeaking: true})
+        this.setState({iconName: "fas fa-pause"});
+      }
+    } else {
+      if (speechSynthesis) {
+        speechSynthesis.cancel();
+        this.setState({isSpeaking: false});
+      }
+    }
   }
 
   render() {
@@ -140,8 +184,11 @@ class Recipe extends Component {
                     <div className = "ingredientContainerShow">
                       {makeIngredients}
                     </div>
-                    <h2 className = "recipeText">Instructions</h2>
-                    <p className = "instructionsText">{recipe.Instructions}</p>
+                    <div className='instructionsContainer'>
+                      <button className = "speakBtn" type="button" onClick = {this.onPlayClick}><FontAwesomeIcon icon={this.state.iconName} /></button>
+                      <h2 className = "recipeText">Instructions</h2>
+                      <p className = "instructionsText">{recipe.Instructions}</p>
+                    </div>
                   </div>
                   <div className = "widgetContainer">
                     <img className = "widgetImage" alt = "category" src = "../images/categoryIcon.png"/>

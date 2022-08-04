@@ -144,6 +144,16 @@
   margin-bottom: 25px;
 }
 
+.speakBtn {
+  background-color: rgb(169, 102, 102);;
+  box-shadow: rgb(0 0 0 / 24%) 1px 4px 15px 0px;
+  border: none;
+  border-radius: 50%;
+  height: 56px;
+  width: 56px;
+  float: right;
+}
+
 .recipeText {
   font-family: "Saira Extra Condensed", sans-serif;
   font-size: 27px;
