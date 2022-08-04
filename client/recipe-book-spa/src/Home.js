@@ -20,13 +20,76 @@ class Home extends Component {
           searchTerm: "",
           placeholder: "Search for a Recipe...",
           navClass: "navLink",
-          recognition: null
+          recognition: null,
+          dialogFlowAgent: null
         };
         
       }
 
     componentDidMount() {
-        
+        const dfMessenger = document.querySelector('df-messenger');
+        if (dfMessenger) {
+            this.setState({dialogFlowAgent: dfMessenger});
+        }
+
+        dfMessenger.addEventListener('df-response-received', function (event) {
+            console.log(event);
+            let intentName = event.detail.response.queryResult.intent.displayName;
+            if (intentName === "GetNutritionalFactsIntent") {
+                const payload = [
+                    {
+                      "type": "info",
+                      "title": event.detail.response.queryResult.fulfillmentMessages[0].card.title,
+                      "subtitle": event.detail.response.queryResult.fulfillmentMessages[0].card.subtitle
+                    }];
+                  dfMessenger.renderCustomCard(payload);
+            } else if (intentName === "GetRecipeByIngredientIntent") {
+                let ingredientName = event.detail.response.queryResult.parameters.food
+                ingredientName = ingredientName.charAt(0).toUpperCase() + ingredientName.slice(1).toLowerCase()
+                dfMessenger.renderCustomText('Here are some ' + ingredientName + ' recipe Suggestions:');
+                handlePayloadRecipeSuggestionData(event)
+            } else if (intentName === "GetRecipeByCuisineIntent") {
+                let cuisineParam = event.detail.response.queryResult.parameters.Cuisine
+                cuisineParam = cuisineParam.charAt(0).toUpperCase() + cuisineParam.slice(1).toLowerCase()
+                dfMessenger.renderCustomText('Here are some ' + cuisineParam + ' recipe Suggestions:');
+                handlePayloadRecipeSuggestionData(event)
+            }
+        });
+
+        function handlePayloadRecipeSuggestionData(event) {
+            const meals = event.detail.response.queryResult.fulfillmentMessages[0].payload.meals;
+            let mealSize = meals.length > 10 ? 10 : meals.length;
+
+            const payload = [];
+            for (let i = 0; i < mealSize; i++) {
+                let currMeal = meals[i];
+                let mealName = currMeal.strMeal.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+                let mealImg = currMeal.strMealThumb;
+                payload.push({
+                    "type": "list",
+                    "title": mealName,
+                    "image": {
+                        "src": {
+                          "rawUrl": mealImg
+                        }
+                    }
+                  });
+                
+                  payload.push({
+                    "type": "divider"
+                  });
+            }
+            dfMessenger.renderCustomCard(payload);
+        }
+
+        dfMessenger.addEventListener('df-list-element-clicked', function (event) {
+            const recipeSuggestion = event.detail.element.title_;
+                this.setState({ searchTerm: recipeSuggestion });
+                this.setState({navClass: "navLinkActive"});
+                const searchBox = document.getElementById("searchBox");
+                searchBox.value = recipeSuggestion;
+        }.bind(this));
+
         const micBtn = document.getElementsByClassName("micButton")[0];
         const micIcon = micBtn.querySelector("svg");
         if (SpeechRecognition) {
@@ -145,6 +208,13 @@ class Home extends Component {
                             <NavLink to="/add" className = "uploadRecipe"> Upload Your Own Recipe.</NavLink>
                         </div>
                     </div>
+                        <df-messenger
+                        chat-icon="https:\\recipe-book-online.herokuapp.com\images\logo.png"
+                        intent="WELCOME"
+                        chat-title="Recipe-Bot"
+                        agent-id="d626b179-fb08-4a7b-8697-cc28513e5a3a"
+                        language-code="en"
+                        ></df-messenger>
                 </div>
             </HashRouter>
         )
