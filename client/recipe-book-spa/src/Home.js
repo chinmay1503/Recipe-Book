@@ -54,7 +54,7 @@ class Home extends Component {
         dfMessenger.addEventListener('df-response-received', function (event) {
             console.log(event);
             let intentName = event.detail.response.queryResult.intent.displayName;
-            if (intentName === "GetNutritionalFactsIntent") {
+            if (intentName === "GetNutritionalFacts") {
                 const payload = [
                     {
                       "type": "info",
@@ -62,24 +62,32 @@ class Home extends Component {
                       "subtitle": event.detail.response.queryResult.fulfillmentMessages[0].card.subtitle
                     }];
                   dfMessenger.renderCustomCard(payload);
-            } else if (intentName === "GetRecipeByIngredientIntent") {
+            } else if (intentName === "GetRecipeByIngredient") {
                 let ingredientName = event.detail.response.queryResult.parameters.food
                 ingredientName = ingredientName.charAt(0).toUpperCase() + ingredientName.slice(1).toLowerCase()
-                handlePayloadRecipeSuggestionData(event, ingredientName);
-            } else if (intentName === "GetRecipeByCuisineIntent") {
+                handlePayloadRecipeSuggestionData(event, 'Here is a recipe suggestion for: ' + ingredientName);
+            } else if (intentName === "GetRecipeListByIngredient") {
+                let ingredientName = event.detail.response.queryResult.parameters.food
+                ingredientName = ingredientName.charAt(0).toUpperCase() + ingredientName.slice(1).toLowerCase()
+                handlePayloadRecipeSuggestionData(event, 'Here are some recipe suggestion for: ' + ingredientName);
+            } else if (intentName === "GetRecipeByCuisine") {
                 let cuisineParam = event.detail.response.queryResult.parameters.Cuisine
                 cuisineParam = cuisineParam.charAt(0).toUpperCase() + cuisineParam.slice(1).toLowerCase()
-                handlePayloadRecipeSuggestionData(event, cuisineParam);
+                handlePayloadRecipeSuggestionData(event, 'Here are some ' + cuisineParam + ' recipe Suggestions:');
+            } else if (intentName === "GetRandomRecipe") {
+                handlePayloadRecipeSuggestionData(event, 'Here is a random recipe suggestion:');
+            } else if (intentName === "GetCocktailInstructions") {
+                handlePayloadCocktailSuggestionData(event, 'Here is your cocktail suggestion:');
             }
         });
 
-        function handlePayloadRecipeSuggestionData(event, param) {
+        function handlePayloadRecipeSuggestionData(event, phrase) {
             if (event.detail && event.detail.response && event.detail.response.queryResult && event.detail.response.queryResult.fulfillmentMessages[0] && event.detail.response.queryResult.fulfillmentMessages[0].payload && event.detail.response.queryResult.fulfillmentMessages[0].payload.meals) {
                 const meals = event.detail.response.queryResult.fulfillmentMessages[0].payload.meals;
                 let mealSize = meals.length > 10 ? 10 : meals.length;
                 
                 const payload = [];
-                dfMessenger.renderCustomText('Here are some ' + param + ' recipe Suggestions:');
+                dfMessenger.renderCustomText(phrase);
                 for (let i = 0; i < mealSize; i++) {
                     let currMeal = meals[i];
                     let mealName = currMeal.strMeal.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
@@ -92,6 +100,41 @@ class Home extends Component {
                               "rawUrl": mealImg
                             }
                         }
+                      });
+                    
+                      payload.push({
+                        "type": "divider"
+                      });
+                }
+                dfMessenger.renderCustomCard(payload);
+            }
+        }
+
+        function handlePayloadCocktailSuggestionData(event, phrase) {
+            if (event.detail && event.detail.response && event.detail.response.queryResult && event.detail.response.queryResult.fulfillmentMessages[0] && event.detail.response.queryResult.fulfillmentMessages[0].payload && event.detail.response.queryResult.fulfillmentMessages[0].payload.data) {
+                const data = event.detail.response.queryResult.fulfillmentMessages[0].payload.data;
+                let cocktailSize = data.length > 10 ? 10 : data.length;
+                
+                const payload = [];
+                dfMessenger.renderCustomText(phrase);
+                for (let i = 0; i < cocktailSize; i++) {
+                    let currCocktail = data[i];
+                    let cocktailName = currCocktail.name;
+                    cocktailName = cocktailName.charAt(0).toUpperCase() + cocktailName.slice(1).toLowerCase()
+                    let ingredientArray = currCocktail.ingredients;
+
+                    let ingredientCount = 0;
+                    let ingredientsSub = "Ingredients: \n";
+                    for (let i = 0; i < ingredientArray.length; i++) {
+                        let currIngredient = ingredientArray[i];
+                        ingredientsSub += ++ingredientCount + ". " + currIngredient + "\n";
+                    }
+
+                    ingredientsSub += "Instructions: \n" + currCocktail.instructions;
+                    payload.push({
+                        "type": "list",
+                        "title": cocktailName,
+                        "subtitle": ingredientsSub
                       });
                     
                       payload.push({
